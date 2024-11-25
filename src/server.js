@@ -34,6 +34,15 @@ app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 
 app.use('/upload', multerRouter)
+const productos = [
+    {nombre: "Chocolate", marca: "Chocolatin", precio: 2450, stock: 12, status: true},
+    {nombre: "Hamburguesa", marca: "Hamburguesin", precio: 2230, stock: 22, status: true},
+    {nombre: "Arroz", marca: "Arrocin", precio: 1330, stock: 42, status: false}
+]
+// res.render('nombre-plantilla, {objetos a enviar})
+app.get('/', (req, res)=>{
+    res.render('productos',{productos})
+})
 
 
 
