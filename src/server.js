@@ -7,6 +7,7 @@ import productRouter from './routes/productos.routes.js'
 
 import cartRouter from './routes/carritos.routes.js'
 import multerRouter from './routes/imagenes.routes.js'
+import chatRouter from './routes/chat.routes.js'
 
 
 const app = express()
@@ -31,17 +32,15 @@ app.set('view engine', 'handlebars')
 //Establezco el directorio de las vistas
 
 
-
-
-app.use('/static', express.static(__dirname + '/public'))//Defino la carpeta publica como destino de los archivos estaticos
 app.set('views', path.join(__dirname, '/views'))
-console.log(__dirname);
+
 
 //app.set('views',__dirname + '/src/views')
 
+app.use('/public', express.static(__dirname + '/public'))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
-
+app.use('/api/chat', chatRouter)
 app.use('/upload', multerRouter)
 const productos = [
     { nombre: "Chocolate", marca: "Chocolatin", precio: 2450, stock: 12, status: true },
@@ -50,19 +49,21 @@ const productos = [
 ]
 // res.render('nombre-plantilla, {objetos a enviar})
 app.get('/', (req, res) => {
-    res.render('productos', { productos })
+    res.render('templates/productos', { productos: productos, js:'productos.js', css: 'productos.css' })
 })
-
+let mensajes = []
 //conexiones de socket.io
 // socket= info que llega de la conexion
 io.on('connection', (socket) => {  //se ejecuatan las funciones cuando se produce el apreton de manos
 
     console.log('Usuario conectado', socket.id); //id de conexion, no es el mismo de la base de datos
-
+    
+    
     socket.on('mensaje', (data) => { //el usuario envia msj ,trabajo con esos datos
         console.log('mesaje recibido', data);
+        mensajes.push(data)
         //enviar un msj
-        socket.emit('respuesta', 'Mensaje recibido correctamente:', data)
+        socket.emit('respuesta', mensajes)
 
 
 
