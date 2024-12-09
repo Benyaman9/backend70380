@@ -1,5 +1,28 @@
-{{!se extiende de layouts por defecto}}
-{{!asi se comenta en handle}}  {{!}}
+<h1>Lista de productos</h1>
+
+<div class="row">
+    {{! metodo foreach en handlebarssss}}
+    {{! consulto verdadero o falsi si existe o no }}
+    {{#each productos}}
+    {{!aqui consulto los atributos del producto}}
+    {{#if status}}
+
+    <div class="card" style="width: 18rem;">
+        
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">Description: {{description}}</p>
+            <p class="card-text">Code: {{code}}</p>
+            <p class="card-text">Category: {{category}}</p>
+            <p class="card-text">Price: ${{price}}</p>
+            <p class="card-text">Stock: {{stock}}</p>
+            
+            <button type="button" class="btn btn-primary">Agregar al carrito</button>
+        </div>
+    </div>
+</div>
 
 
-<p>Hola, desde HOME: {{message}}</p>
+{{/if}}
+{{/each}}
+</div>
