@@ -1,4 +1,5 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { create } from 'express-handlebars'
 import { Server } from 'socket.io'
 import path from 'path'
@@ -18,6 +19,13 @@ const server =
     app.listen(PORT, () => {
         console.log("Server on port", PORT)
     })
+
+
+await mongoose.connect("mongodb+srv://benjaartunduaga00:Victorbenjamin9@cluster0.2saxz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.then(()=> console.log("BDD conectada"))
+.catch((e)=> console.log("Error al conectar con BDD:", e))
+
+
 
 //inicializo socket.io en el servidor
 const io = new Server(server)
