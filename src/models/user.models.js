@@ -5,7 +5,7 @@ const userSchema = new Schema({
 
     email: {
         type: String,
-        unique: true
+        unique: true // como es unico ya tiene implementado el indice por defecto
     }
 })                      //nombre de la coleccion y esquema a utilizar
 export const userModel =model("users", userSchema)

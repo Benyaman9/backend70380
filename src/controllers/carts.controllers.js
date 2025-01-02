@@ -2,8 +2,8 @@ import cartModel from "../models/cart.model.js";
 
 export const getCart = async (req,res)=>{
     try {
-        const cartId = req.params.cid
-        const cart = await cartModel.findById(cartId)
+        const cartId = req.params.cid               //atributo - id de referencia
+        const cart = await cartModel.findOne({_id: cartId})
         res.status(200).send(cart)
     } catch (e) {
         console.log(e)
@@ -27,7 +27,7 @@ export const insertProductCart = async (req,res)=>{
         const cartId = req.params.cid
         const productId = req.params.pid
         const {quantity} = req.body
-        const cart = await cartModel.findById(cartId)
+        const cart = await cartModel.findById(cartId) // como agrego un prod no necesito populate
         if(cart){
     //consulto si el producto existe o no en el carrito
     const indice = cart.products.findIndex(prod => prod.id_prod == productId)

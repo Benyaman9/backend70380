@@ -18,5 +18,9 @@ const cartSchema = new Schema({
         default: []
     }
 })
+// cada vez que ejcuto finOne me manejo via populate 
+cartSchema.pre('findOne', function() {
+    this.populate('products.id_prod')
+})
 const cartModel = model("carts", cartSchema)
 export default cartModel
