@@ -9,6 +9,7 @@ import productRouter from './routes/productos.routes.js'
 import cartRouter from './routes/carritos.routes.js'
 import multerRouter from './routes/imagenes.routes.js'
 import chatRouter from './routes/chat.routes.js'
+import orderRouter from './routes/orders.routes.js'
 
 
 const app = express()
@@ -49,6 +50,7 @@ app.use('/public', express.static(__dirname + '/public'))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/api/chat', chatRouter)
+app.use('/api/orders', orderRouter)
 app.use('/upload', multerRouter)
 
 // res.render('nombre-plantilla, {objetos a enviar})
