@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCart, createCart, insertProductCart } from "../controllers/carts.controllers.js";
+import { getCart, createCart, insertProductCart, updateProductsCart, updateQuantityProductCart, deleteCart, deleteProductCart } from "../controllers/carts.controllers.js";
 
 const cartRouter = Router()
 
@@ -13,6 +13,12 @@ cartRouter.post('/', createCart)
 
 //agregar nueo prod al carrito
 cartRouter.post('/:cid/products/:pid', insertProductCart)
+
+
+cartRouter.put('/:cid', updateProductsCart) // modif totalmente el array de productos del carro
+cartRouter.put('/:cid/products/:pid', updateQuantityProductCart)// actualizao cant de prod
+cartRouter.delete('/:cid', deleteCart) // elimino todos los prod
+cartRouter.delete('/:cid/products/:pid', deleteProductCart) //elimino un prod del carrito
 
     
 
